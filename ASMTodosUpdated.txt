@@ -1,0 +1,26 @@
+Updated to do s for TASM project
+
+
+I have a better understanding of how to include external files with procedures, macros, variables via external asm or .inc
+
+First thing:
+- Type up answer for TASM question on Stack Overflow
+	- use external example
+	- use .inc file example
+	- use procedure prototype example
+		- found in chatgpt chat practice program to make sure it works then add to post
+
+
+Build out Journal application
+Phase 1
+- Figure out registers and segments and their responsibilities so it can lead to plug and play
+- Start with rough display
+- CRUD/Input Process Output
+
+ Phase 2
+- add cpp for graphics to the application
+- create server in cpp 
+- put application on there
+
+
+That is a good program to start with

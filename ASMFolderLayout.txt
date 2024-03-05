@@ -1,0 +1,19 @@
+This is a text file for the ASM projects that will be in this folder
+
+
+Project one
+--Want the final result to a file system to document a finanical expendentures over time
+	-- like an inbventory application
+
+
+Project two
+-- game that is called plant parent
+	-- basically some one chooses from three plants and try to keep it alive
+
+
+
+
+
+
+
+Balance this with looking at malware files in ghidra

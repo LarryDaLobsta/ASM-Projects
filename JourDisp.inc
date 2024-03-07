@@ -15,6 +15,9 @@
     arraySize DW 5                 ; Number of elements in the array
     Choice_Disp DB 'Choice', 'B', 'C', 'D', 'E'
 
+    ;;input buffer section
+    buffer DB ? ; Define a buffer to store user input
+
     
     
 .Code
@@ -58,10 +61,18 @@ ENDM
 
 GrabInput_Scr MACRO
     ; grabs the input from the user 
-    mov ah, 01h        ; Function 01h of interrupt 21h waits for a keypress
+    mov ah, 01h        ; Function 01h of interrupt 21h waits for a single key NOT a string
     int 21h
+    MOV buffer, al ; DX points to the buffer where the input will be stored
+
+    ;;Display user input back to the screen
+    ;MOV DL, AL
+    ;MOV AH, 02h         ; Function 09h of DOS interrupt 21h prints string to standard output, we are using 02h for single char
+    ;INT 21h             ; Call DOS interrupt 21h to print the string
+
+
     ; Exit interrupt
-    MOV AH, 4Ch
+    MOV AH, 004Ch
     INT 21h
 ENDM
 
@@ -81,6 +92,22 @@ Exit_Scr MACRO
     INT 21h
     RET
 ENDM
+
+
+;User choice validation
+
+UserCh_Val PROC Usr_Choice ; validates the user choice to see if it was a valid input
+
+; if the Usr_Choice is not the value of Aa or Bb or Cc or 0
+; then loop
+; else jmp to the appropriate macro for the system call
+
+;may want to add an extra help macro like an evaluator to break this up a little more
+
+    
+UserCh_Val ENDP 
+
+
 
 
 

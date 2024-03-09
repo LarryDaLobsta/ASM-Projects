@@ -64,16 +64,11 @@ GrabInput_Scr MACRO
     mov ah, 01h        ; Function 01h of interrupt 21h waits for a single key NOT a string
     int 21h
     MOV buffer, al ; DX points to the buffer where the input will be stored
-
-    ;;Display user input back to the screen
-    ;MOV DL, AL
-    ;MOV AH, 02h         ; Function 09h of DOS interrupt 21h prints string to standard output, we are using 02h for single char
-    ;INT 21h             ; Call DOS interrupt 21h to print the string
-
-
-    ; Exit interrupt
-    MOV AH, 004Ch
-    INT 21h
+    mov ah,0
+    push ax
+    CALL UserCh_Val
+    ADD SP, 2
+    Exit_Scr 
 ENDM
 
 
@@ -94,9 +89,42 @@ Exit_Scr MACRO
 ENDM
 
 
-;User choice validation
+;User choice validationf
 
-UserCh_Val PROC Usr_Choice ; validates the user choice to see if it was a valid input
+UserCh_Val PROC  UsrInput:Byte; validates the user choice to see if it was a valid input
+mov BL, UsrInput
+;0
+cmp BL, 30h
+je Exit:
+
+;A
+cmp BL, 41h
+je NewEntry
+NewEntry:
+    Choice_Screen
+    jmp RetState
+
+;a
+cmp BL, 61h
+je NewEntry
+NewEntry:
+    Choice_Screen
+    jmp RetState
+
+
+
+Exit:
+    Exit_Scr
+
+RetState:
+    ret
+
+
+;;jmp to exit
+
+
+
+
 
 ; if the Usr_Choice is not the value of Aa or Bb or Cc or 0
 ; then loop
